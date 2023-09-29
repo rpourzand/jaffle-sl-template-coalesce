@@ -69,22 +69,25 @@ metrics:
   - name: spice_tons
     description: All the spice harvested in tons
     type: simple
-    label: Order Total
+    label: Spice Amount
     type_params:
       measure: spice_amount
   - name: spice_profit
     description: Spice Profit in dollars
     type: simple
+    label: Spice Profit
     type_params:
       measure: spice_profit
   - name: sandworm_sightings
     description: The sandworms seen during harvest
     type: simple
+    label: Sandworm Sightings
     type_params:
       measure: sandworm_sightings
   - name: temperature
     description: Temperature in Celsius during harvest
     type: simple
+    label: Temperature in Celsius
     type_params:
       measure: temperature
  

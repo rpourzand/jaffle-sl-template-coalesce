@@ -1,5 +1,5 @@
 models:
-  - name: spice
+  - name: spice_amount
     description: Spice harvest information
     columns:
       - name: harvested_at

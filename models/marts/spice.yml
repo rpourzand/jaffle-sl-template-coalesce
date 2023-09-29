@@ -1,5 +1,5 @@
 models:
-  - name: spice_amount
+  - name: spice
     description: Spice harvest information
     columns:
       - name: harvested_at
@@ -31,7 +31,7 @@ semantic_models:
       agg_time_dimension: harvested_at
     description: |
       Spice fact table. This table is at the order grain with one row per order.
-    model: ref('spice_amount')
+    model: ref('spice')
     entities:
       - name: spice
         type: primary

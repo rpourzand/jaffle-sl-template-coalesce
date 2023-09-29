@@ -1,0 +1,90 @@
+models:
+  - name: spice
+    description: Spice harvest information
+    columns:
+      - name: harvested_at
+        description: The time of harvest
+      - name: harvester_id
+        description: The unique key of the harvester
+        tests:
+          - not_null
+          - unique
+      - name: noble_house_id
+        description: The foreign key relating to the noble house name
+      - name: planet_id
+        description: The foreign key relating to the planet it was harvested on
+      - name: planet_name
+        description: The name of the planet
+      - name: spice_amount
+        description: total spice
+      - name: spice_profit
+        description: profit from spice
+      - name: sandworm_sightings
+        description: sandworm seens while harvesting spice
+      - name: temperature
+        description: temperature at the time of harvest
+    
+
+semantic_models:
+  - name: spice_harvest
+    defaults:
+      agg_time_dimension: harvested_at
+    description: |
+      Spice fact table. This table is at the order grain with one row per order.
+    model: ref('spice')
+    entities:
+      - name: spice
+        type: primary
+        expr: harvester_id
+      - name: noble
+        type: foreign
+        expr: noble_house_id
+    dimensions:
+      - name: harvested_at
+        expr: harvested_at
+        type: time
+        type_params:
+          time_granularity: day
+      - name: planet
+        type: categorical
+        expr: planet_name
+      - name: city
+        type: categorical
+        expr: planet_id
+      
+    measures:
+      - name: spice_amount
+        description: The total spice harvested
+        agg: sum
+      - name: spice_profit
+        agg: sum
+      - name: temperature
+        description: The temperature
+        agg: sum
+      - name: sandworm_sightings
+        description: Sandworm sightings
+        agg: sum
+
+metrics:
+  - name: spice_tons
+    description: All the spice harvested in tons
+    type: simple
+    label: Order Total
+    type_params:
+      measure: spice_amount
+  - name: spice_profit
+    description: Spice Profit in dollars
+    type: simple
+    type_params:
+      measure: spice_profit
+  - name: sandworm_sightings
+    description: The sandworms seen during harvest
+    type: simple
+    type_params:
+      measure: sandworm_sightings
+  - name: temperature
+    description: Temperature in Celsius during harvest
+    type: simple
+    type_params:
+      measure: temperature
+ 

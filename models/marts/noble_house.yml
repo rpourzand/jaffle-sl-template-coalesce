@@ -18,4 +18,6 @@ semantic_models:
         expr: noble_house_id
     dimensions:
       - name: house
+        type: categorical
         expr: noble_house_name
+        

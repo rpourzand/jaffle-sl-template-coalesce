@@ -1,11 +1,3 @@
-models:
-  - name: noble_house
-    description: Noble house information
-    columns:
-      - name: noble_house_id
-        description: id of the house
-      - name: noble_house_name
-        description: the house name
 
 semantic_models:
   - name: noble_houses
